@@ -11,8 +11,8 @@ import java.util.List;
 
 @Component
 public class DataSource {
-    private AuthorData authorData;
-    private NewsData newsData;
+    private final AuthorData authorData;
+    private final NewsData newsData;
 
     @Autowired
     public DataSource(AuthorData authorData, NewsData newsData) {
@@ -29,10 +29,10 @@ public class DataSource {
     }
 
     public long getNextAuthorId() {
-        return authorData.getNextId();
+        return AuthorData.getNextId();
     }
 
     public long getNextNewsId() {
-        return newsData.getNextId();
+        return NewsData.getNextId();
     }
 }

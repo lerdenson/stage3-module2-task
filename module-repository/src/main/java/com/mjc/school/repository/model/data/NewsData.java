@@ -17,6 +17,7 @@ public class NewsData {
     private static final String CONTENT_FILE_NAME = "content";
     private static final String NEWS_FILE_NAME = "news";
     private static long id = 1;
+    Random random = new Random();
     private List<NewsModel> newsList;
 
     @Autowired
@@ -24,7 +25,7 @@ public class NewsData {
         init(authorData.getAuthorsList());
     }
 
-    public long getNextId() {
+    public static long getNextId() {
         return id++;
     }
 
@@ -34,7 +35,7 @@ public class NewsData {
 
     private void init(List<AuthorModel> authorsList) {
         newsList = new ArrayList<>();
-        Random random = new Random();
+
         for (int i = 0; i < 20; i++) {
             newsList.add(
                     new NewsModel(

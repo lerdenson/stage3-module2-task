@@ -23,7 +23,7 @@ public class AuthorData {
         return authorsList;
     }
 
-    public long getNextId() {
+    public static long getNextId() {
         return id++;
     }
 

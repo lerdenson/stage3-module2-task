@@ -30,24 +30,12 @@ public class NewsDtoResponse {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
-    }
-
     public void setContent(String content) {
         this.content = content;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
     public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
-    }
-
-    public LocalDateTime getLastUpdateDate() {
-        return lastUpdateDate;
     }
 
     public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
@@ -79,7 +67,7 @@ public class NewsDtoResponse {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NewsDtoResponse that = (NewsDtoResponse) o;
-        return id == that.id && authorId == that.authorId && Objects.equals(title, that.title) && Objects.equals(content, that.content) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdateDate, that.lastUpdateDate);
+        return Objects.equals(id, that.id) && Objects.equals(authorId, that.authorId) && Objects.equals(title, that.title) && Objects.equals(content, that.content) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdateDate, that.lastUpdateDate);
     }
 
     @Override

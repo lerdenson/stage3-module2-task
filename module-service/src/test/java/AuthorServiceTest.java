@@ -15,7 +15,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringJUnitConfig(NewsServiceTest.Config.class)
-public class AuthorServiceTest {
+class AuthorServiceTest {
 
 
     Random random = new Random();

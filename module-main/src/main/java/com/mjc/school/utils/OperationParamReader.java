@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 @Component
 public class OperationParamReader {
+    private final String WRONG_ID_MESSAGE = "id must be digital";
 
     public RequestDto readCommandParams(Operations operation, Scanner scanner) throws WrongInputException {
         switch (operation) {
@@ -44,7 +45,7 @@ public class OperationParamReader {
             Map<String, String> params = new HashMap<>();
             params.put("id", id);
             return new RequestDto(params);
-        } else throw new WrongInputException("Id must be digital");
+        } else throw new WrongInputException(WRONG_ID_MESSAGE);
     }
 
     private RequestDto addNews(Scanner scanner) throws WrongInputException {
@@ -62,7 +63,7 @@ public class OperationParamReader {
         Map<String, String> params = new HashMap<>();
 
         String id = readString(scanner, "id");
-        if (!isLong(id)) throw new WrongInputException("Id must be digital");
+        if (!isLong(id)) throw new WrongInputException(WRONG_ID_MESSAGE);
         params.put("id", id);
 
         return getGeneralNewsData(scanner, params);
@@ -73,7 +74,7 @@ public class OperationParamReader {
         Map<String, String> params = new HashMap<>();
 
         String id = readString(scanner, "id");
-        if (!isLong(id)) throw new WrongInputException("Id must be digital");
+        if (!isLong(id)) throw new WrongInputException(WRONG_ID_MESSAGE);
         params.put("id", id);
 
         params.put("name", readString(scanner, "name"));
@@ -85,7 +86,7 @@ public class OperationParamReader {
         params.put("title", readString(scanner, "title"));
         params.put("content", readString(scanner, "content"));
         String authorId = readString(scanner, "author id");
-        if (!isLong(authorId)) throw new WrongInputException("Author Id must be digital");
+        if (!isLong(authorId)) throw new WrongInputException(WRONG_ID_MESSAGE);
 
         params.put("authorId", authorId);
 
@@ -103,6 +104,6 @@ public class OperationParamReader {
     }
 
     private boolean isLong(String string) {
-        return string.matches("[0-9]*");
+        return string.matches("\\d*");
     }
 }
