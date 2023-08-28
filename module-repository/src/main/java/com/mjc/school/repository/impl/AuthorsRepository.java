@@ -37,6 +37,8 @@ public class AuthorsRepository implements BaseRepository<AuthorModel, Long> {
     public AuthorModel create(AuthorModel entity) {
         List<AuthorModel> authorList = dataSource.getAuthors();
         entity.setId(dataSource.getNextAuthorId());
+        entity.setCreateDate(LocalDateTime.now());
+        entity.setLastUpdateDate(LocalDateTime.now());
         authorList.add(entity);
         return entity;
     }
@@ -51,11 +53,15 @@ public class AuthorsRepository implements BaseRepository<AuthorModel, Long> {
 
     }
 
-    @OnDelete
     @Override
+    @OnDelete
     public boolean deleteById(Long id) {
-        AuthorModel author = readById(id).get();
-        return dataSource.getAuthors().remove(author);
+        Optional<AuthorModel> optionalAuthorModel = readById(id);
+        if (optionalAuthorModel.isPresent()) {
+            List<AuthorModel> authorsList = dataSource.getAuthors();
+            return authorsList.remove(optionalAuthorModel.get());
+        } else return false;
+
     }
 
     @Override

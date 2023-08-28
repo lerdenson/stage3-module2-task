@@ -16,20 +16,28 @@ public class AuthorModel implements BaseEntity<Long> {
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public LocalDateTime getCreateDate() {
+        return createDate;
     }
 
     public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
+    public LocalDateTime getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
     public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

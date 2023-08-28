@@ -47,12 +47,23 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
     @ToValidate
     @Override
     public NewsDtoResponse update(NewsDtoRequest updateRequest) {
-        return newsMapper.modelToDto(newsRepository.update(newsMapper.dtoToModel(updateRequest)));
+        checkNewsExist(updateRequest.getId());
+        return newsMapper.modelToDto(
+                newsRepository.update(
+                        newsMapper.dtoToModel(updateRequest)
+                )
+        );
 
     }
 
     @Override
     public boolean deleteById(Long id) {
         return newsRepository.deleteById(id);
+    }
+
+    private void checkNewsExist(Long id) {
+        if (!newsRepository.existById(id)) {
+            throw new NotFoundException(String.format(ErrorCodeMessage.NEWS_NOT_FOUND.toMsg(), id));
+        }
     }
 }

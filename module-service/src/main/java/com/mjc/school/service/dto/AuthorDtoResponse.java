@@ -1,6 +1,7 @@
 package com.mjc.school.service.dto;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class AuthorDtoResponse {
     private Long id;
@@ -11,11 +12,27 @@ public class AuthorDtoResponse {
     public AuthorDtoResponse() {
     }
 
-    public AuthorDtoResponse(Long id, String name, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
-        this.id = id;
-        this.name = name;
-        this.createDate = createDate;
-        this.lastUpdateDate = lastUpdateDate;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AuthorDtoResponse that = (AuthorDtoResponse) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdateDate, that.lastUpdateDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, createDate, lastUpdateDate);
+    }
+
+    @Override
+    public String toString() {
+        return "AuthorDtoResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", createDate=" + createDate +
+                ", lastUpdateDate=" + lastUpdateDate +
+                '}';
     }
 
     public Long getId() {

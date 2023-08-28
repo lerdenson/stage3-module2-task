@@ -39,6 +39,10 @@ public class NewsModel implements BaseEntity<Long> {
         return createDate;
     }
 
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+
     public LocalDateTime getLastUpdateDate() {
         return lastUpdateDate;
     }

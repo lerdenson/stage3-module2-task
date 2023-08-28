@@ -1,32 +1,24 @@
 package com.mjc.school.service.dto;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class NewsDtoResponse {
-    private long id;
+    private Long id;
     private String title;
     private String content;
     private LocalDateTime createDate;
     private LocalDateTime lastUpdateDate;
-    private long authorId;
-
-    public NewsDtoResponse(long id, String title, String content, LocalDateTime createDate, LocalDateTime lastUpdateDate, long authorId) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.createDate = createDate;
-        this.lastUpdateDate = lastUpdateDate;
-        this.authorId = authorId;
-    }
+    private Long authorId;
 
     public NewsDtoResponse() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -62,11 +54,36 @@ public class NewsDtoResponse {
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    public long getAuthorId() {
+    public Long getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(long authorId) {
+    public void setAuthorId(Long authorId) {
         this.authorId = authorId;
+    }
+
+    @Override
+    public String toString() {
+        return "NewsDtoResponse{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", createDate=" + createDate +
+                ", lastUpdateDate=" + lastUpdateDate +
+                ", authorId=" + authorId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NewsDtoResponse that = (NewsDtoResponse) o;
+        return id == that.id && authorId == that.authorId && Objects.equals(title, that.title) && Objects.equals(content, that.content) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdateDate, that.lastUpdateDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, content, createDate, lastUpdateDate, authorId);
     }
 }

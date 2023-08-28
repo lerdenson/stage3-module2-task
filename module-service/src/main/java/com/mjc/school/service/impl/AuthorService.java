@@ -38,20 +38,30 @@ public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoRes
         else throw new NotFoundException(String.format(ErrorCodeMessage.AUTHOR_NOT_FOUND.toMsg(), id));
     }
 
-    @ToValidate
     @Override
+    @ToValidate
     public AuthorDtoResponse create(AuthorDtoRequest createRequest) {
         return authorMapper.modelToDto(authorRepository.create(authorMapper.dtoToModel(createRequest)));
     }
 
-    @ToValidate
     @Override
+    @ToValidate
     public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
-        return authorMapper.modelToDto(authorRepository.update(authorMapper.dtoToModel(updateRequest)));
+        checkAuthorExist(updateRequest.getId());
+        return authorMapper.modelToDto(
+                authorRepository.update(
+                        authorMapper.dtoToModel(updateRequest)
+                )
+        );
     }
 
     @Override
     public boolean deleteById(Long id) {
         return authorRepository.deleteById(id);
+    }
+
+    private void checkAuthorExist(Long id) {
+        if (!authorRepository.existById(id))
+            throw new NotFoundException(String.format(ErrorCodeMessage.AUTHOR_NOT_FOUND.toMsg(), id));
     }
 }

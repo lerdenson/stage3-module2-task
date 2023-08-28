@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -15,9 +16,8 @@ import static com.mjc.school.repository.utils.Utils.getRandomLineFromFile;
 public class NewsData {
     private static final String CONTENT_FILE_NAME = "content";
     private static final String NEWS_FILE_NAME = "news";
-    private List<NewsModel> newsList;
-
     private static long id = 1;
+    private List<NewsModel> newsList;
 
     @Autowired
     public NewsData(AuthorData authorData) {
@@ -33,6 +33,7 @@ public class NewsData {
     }
 
     private void init(List<AuthorModel> authorsList) {
+        newsList = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < 20; i++) {
             newsList.add(

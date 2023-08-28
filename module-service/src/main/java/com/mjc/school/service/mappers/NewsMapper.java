@@ -17,7 +17,7 @@ public interface NewsMapper {
 
     @Mappings({
             @Mapping(target = "createDate", ignore = true),
-            @Mapping(target = "lastUpdatedDate", ignore = true)
+            @Mapping(target = "lastUpdateDate", ignore = true)
     })
     NewsModel dtoToModel(NewsDtoRequest newsModelRequest);
 

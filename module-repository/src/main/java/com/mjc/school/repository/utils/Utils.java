@@ -9,18 +9,22 @@ import java.util.Random;
 
 public class Utils {
     public static String getRandomLineFromFile(String filename) {
-        List<String> content = new ArrayList<>();
+        List<String> content = getLinesFromFile(filename);
         Random random = new Random();
+
+        return content.isEmpty() ? "" : content.get(random.nextInt(content.size()));
+    }
+
+    public static List<String> getLinesFromFile(String filename) {
+        List<String> content = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Utils.class.getClassLoader().getResourceAsStream(filename)))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 content.add(line);
             }
-            return content.get(random.nextInt(content.size()));
-
         } catch (IOException e) {
             e.printStackTrace();
-            return "";
         }
+        return content;
     }
 }

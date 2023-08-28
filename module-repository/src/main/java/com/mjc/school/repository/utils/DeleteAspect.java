@@ -11,17 +11,22 @@ import java.util.List;
 @Aspect
 @Component
 public class DeleteAspect {
-    DataSource dataSource;
-
+    private final DataSource dataSource;
 
     @Autowired
-    public DeleteAspect(DataSource dataSource) {
+    private DeleteAspect(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @AfterReturning("@annotation(com.mjc.school.repository.annotations.OnDelete) && args(id)")
     public void onAuthorDelete(Long id) {
-        List<NewsModel> listToDelete = dataSource.getNews().stream().filter(a -> a.getAuthorId().equals(id)).toList();
-        dataSource.getNews().removeAll(listToDelete);
+        List<NewsModel> newsList = dataSource.getNews();
+
+        List<NewsModel> deletedList = newsList
+                .stream()
+                .filter(news -> news.getAuthorId().equals(id))
+                .toList();
+
+        newsList.removeAll(deletedList);
     }
 }

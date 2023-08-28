@@ -7,13 +7,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mjc.school.repository.utils.Utils.getRandomLineFromFile;
+import static com.mjc.school.repository.utils.Utils.getLinesFromFile;
 
 @Component
 public class AuthorData {
     private static final String AUTHORS_FILE_NAME = "authors";
-    private List<AuthorModel> authorsList;
     private static long id = 1;
+    private List<AuthorModel> authorsList;
 
     public AuthorData() {
         init();
@@ -28,12 +28,13 @@ public class AuthorData {
     }
 
     private void init() {
-        for (int i = 0; i < 20; i++) {
-            authorsList = new ArrayList<>();
+        authorsList = new ArrayList<>();
+        List<String> authorNames = getLinesFromFile(AUTHORS_FILE_NAME);
+        for (String authorName : authorNames) {
             authorsList.add(
                     new AuthorModel(
                             getNextId(),
-                            getRandomLineFromFile(AUTHORS_FILE_NAME),
+                            authorName,
                             LocalDateTime.now(),
                             LocalDateTime.now()
                     ));

@@ -9,6 +9,10 @@ public class AuthorDtoRequest {
         this.name = name;
     }
 
+    public AuthorDtoRequest(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

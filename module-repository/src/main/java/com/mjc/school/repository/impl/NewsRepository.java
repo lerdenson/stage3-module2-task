@@ -33,6 +33,8 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
     public NewsModel create(NewsModel entity) {
         List<NewsModel> newsList = dataSource.getNews();
         entity.setId(dataSource.getNextNewsId());
+        entity.setCreateDate(LocalDateTime.now());
+        entity.setLastUpdateDate(LocalDateTime.now());
         newsList.add(entity);
         return entity;
     }
@@ -50,9 +52,12 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     @Override
     public boolean deleteById(Long id) {
-        NewsModel newsModel = readById(id).get();
-        List<NewsModel> newsList = dataSource.getNews();
-        return newsList.remove(newsModel);
+        Optional<NewsModel> optionalNewsModel = readById(id);
+        if (optionalNewsModel.isPresent()) {
+            List<NewsModel> newsList = dataSource.getNews();
+            return newsList.remove(optionalNewsModel.get());
+        } else return false;
+
     }
 
     @Override
